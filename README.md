@@ -10,3 +10,6 @@ You can start change_focused_border_color.py from within bspwmrc.
 
 ## download_and_build
 Contains a download and build script and spec files for bspwm, sxhkd, lemonbar, sutil, xtitle 
+
+## .config
+My current bspwm, sxhkd and panel (lemonbar) config
