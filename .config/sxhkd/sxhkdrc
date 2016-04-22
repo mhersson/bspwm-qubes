@@ -1,0 +1,134 @@
+#
+# bspwm keybindings
+#
+
+# Move/transplant into last preselected node
+alt + y
+    bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# Balance the desktop
+alt + b
+    bspc query -N -d | xargs -I id -n 1 bspc node id -B
+
+# Set node sticky
+alt + s
+    bspc node -g sticky
+
+# Toggle tiled, pseudo_tiled
+alt + {_,shift + }t
+    bspc node -t ~{tiled,pseudo_tiled}
+
+# Toggle floating, fullscreen
+alt + {_,shift + }space
+    bspc node -t ~{floating,fullscreen}
+
+# Close and kill
+alt + {_,shift + }w
+    bspc node -{c,k}
+
+# Start dmenu
+alt + p
+    qvm-run -a -q megatron 'dmenu_run -fn -*-terminus-medium-r-*-*-18-*-*-*-*-*-*-* -nb "#060606" -nf "#D0D0D0" -sf "#FF5F00" -sb  "#060606"'
+
+# Swap with the biggest node on desktop
+alt + Return
+    bspc node -s biggest
+
+# Start new terminal
+alt + shift + Return
+    qvm-run -q -a megatron urxvt
+
+# Start new browser
+alt + shift + b
+    qvm-run -q -a megatron firefox
+
+# Move focus or switch current node 
+alt + {_,shift + }{Left,Down,Up,Right}
+    bspc node -{f,s} {west,south,north,east}
+
+# Move focus to or move current node to desktop
+alt + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} ^{1-9,10}
+
+# Cycle trough nodes
+alt + {_,shift + }Tab
+    bspc node -f {next,prev
+
+# Preselect split direction
+alt + ctrl + {Left,Down,Up,Right}
+    bspc node -p {west,south,north,east}
+
+# Cancel preselect
+alt + ctrl + space
+    bspc node -p cancel
+
+# Change node gap                                                                                                                     
+super + {plus, minus}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+# Resize from outer edge
+super + {Left,Down,Up,Right}
+    bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+# Resize from inner edge
+super + shift + {Left,Down,Up,Right}
+    bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+
+# Make sxhkd reload its configuration files
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Quit bspwm with panel
+super + shift + Escape
+    pkill -x panel && bspc quit
+
+# Turn on screensaver
+super + shift + l
+    xlock -mode bouboule -delay 40000
+
+# Turn off monitor
+super + l
+    sleep 1; xset dpms force off
+
+
+
+# Basic mouse bindings
+~button1
+    bspc pointer -g focus
+
+alt + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+#alt + !button{1-3}
+#   bspc pointer -t %i %i
+
+alt + @button{1-3}
+    bspc pointer -u
+
+# Special buttons
+XF86AudioRaiseVolume
+    pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +3%
+    #amixer set Master 2dB+ unmute
+
+XF86AudioLowerVolume
+    pactl set-sink-mute 1 false ; pactl -- set-sink-volume 1 -3%
+    #amixer set Master 2dB- unmute
+
+XF86AudioMute
+    pactl set-sink-mute 1 toggle
+    # amixer set Master toggle
+
+# Qubes dom0 and appvm
+super + {_,shift} + 0
+    {konsole,qubes-manager}
+
+super + {_,shift +} 1
+    qvm-run -a -q ironhide {urxvt,firefox}
+
+super + {_,shift} + 2
+    qvm-run -a -q starscream {urxvt,tor-browser-en}
+
+super + {_,shift} + 3
+    qvm-run -a -q shockwave {gnome-terminal,firefox}
+

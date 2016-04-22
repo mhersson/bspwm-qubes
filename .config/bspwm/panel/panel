@@ -1,0 +1,28 @@
+#! /bin/sh
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=18
+PANEL_FONT_FAMILY="DejaVu Sans Mono:regular:size=11"
+export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
+
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+bspc subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+clock -sf 'S%a %b %d %H:%M:%S' > "$PANEL_FIFO" &
+
+. ~/.config/bspwm/panel/panel_colors
+
+cat "$PANEL_FIFO" | ~/.config/bspwm/panel/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait
