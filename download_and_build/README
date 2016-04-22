@@ -1,0 +1,17 @@
+The download_and_build script downloads all dependencies needed to build rpms
+for
+    - bspwm
+    - sxhkd
+    - lemonbar-xft
+    - sutils
+    - xtitle
+
+The bash script sets the version numbers in the .spec files, so don't change
+the version numbers in the .spec file. They will be overwritten.
+
+After running the entire script, if all is successful, one should have a
+dist.tar.gz file that contains rpms for all the above mentioned packages.
+
+Copy dist.tar.gz to dom0 and install with rpm -Uvh <package>.rpm
+You may need to install libxcb, xcb-util, xcb-util-wm, libXft, libX11,
+xcb-util-keysyms if they are not already on your system
