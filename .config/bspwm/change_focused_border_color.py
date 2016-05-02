@@ -15,7 +15,6 @@ Description:
 
 Copyright (c) 2016 Morten Hersson
 '''
-from __future__ import print_function
 import xpybutil
 import xpybutil.event as event
 import xpybutil.ewmh as ewmh
