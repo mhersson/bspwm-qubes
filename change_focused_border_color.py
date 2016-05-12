@@ -50,7 +50,7 @@ def set_border_color():
     try:
         prop = util.PropertyCookie(util.get_property(
             activewin, '_QUBES_LABEL')).reply()
-    except xcb.xproto.WindowError:
+    except:
         return
     if prop is not None:
         qlabel = ord(prop)
