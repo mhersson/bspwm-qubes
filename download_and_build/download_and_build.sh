@@ -1,8 +1,8 @@
 #!/bin/bash
 # vim:set shiftwidth=4 softtabstop=4 expandtab:
 
-bspwm_version=0.9.1
-sxhkd_version=0.5.6
+bspwm_version=0.9.2
+sxhkd_version=0.5.7
 lemon_version=a43b801 
 sutils_version=f35ea44
 xtitle_version=0.3
@@ -50,7 +50,7 @@ if [ "$key" = '' ]; then
     cd bspwm
     sed -i "s/Version:.*/Version:\t$bspwm_version/" bspwm.spec
     wget https://github.com/baskerville/bspwm/archive/$bspwm_version.tar.gz
-    fedpkg --dist f20 local 
+    fedpkg --dist f23 local 
     cp ./x86_64/bspwm-$bspwm_version*.x86_64.rpm ../dist/
     cd ..
 elif [ "$key" = 'x' ]; then
@@ -67,7 +67,7 @@ if [ "$key" = '' ]; then
     cd sxhkd
     sed -i "s/Version:.*/Version:\t$sxhkd_version/" sxhkd.spec
     wget https://github.com/baskerville/sxhkd/archive/$sxhkd_version.tar.gz
-    fedpkg --dist f20 local 
+    fedpkg --dist f23 local 
     cp ./x86_64/sxhkd-$sxhkd_version*.x86_64.rpm ../dist/
     cd ..
 elif [ "$key" = 'x' ]; then
@@ -89,7 +89,7 @@ if [ "$key" = '' ]; then
     mv bar-$lemon_version* lemonbar-$lemon_version
     mv $lemon_version.tar.gz downloaded.tar.gz
     tar zcf $lemon_version.tar.gz lemonbar-$lemon_version
-    fedpkg --dist f20 local
+    fedpkg --dist f23 local
     cp ./x86_64/lemonbar-$lemon_version*.x86_64.rpm ../dist/
     cd ..
 elif [ "$key" = 'x' ]; then
@@ -111,7 +111,7 @@ if [ "$key" = '' ]; then
     mv sutils-$sutils_version* sutils-$sutils_version
     mv $sutils_version.tar.gz downloaded.tar.gz
     tar zcf $sutils_version.tar.gz sutils-$sutils_version
-    fedpkg --dist f20 local
+    fedpkg --dist f23 local
     cp ./x86_64/sutils-$sutils_version*.x86_64.rpm ../dist/
     cd ..
 elif [ "$key" = 'x' ]; then
@@ -128,7 +128,7 @@ if [ "$key" = '' ]; then
     cd xtitle
     sed -i "s/Version:.*/Version:\t$xtitle_version/" xtitle.spec
     wget https://github.com/baskerville/xtitle/archive/$xtitle_version.tar.gz
-    fedpkg --dist f20 local 
+    fedpkg --dist f23 local 
     cp ./x86_64/xtitle-$xtitle_version*.x86_64.rpm ../dist/
     cd ..
 elif [ "$key" = 'x' ]; then

@@ -1,5 +1,5 @@
 Name:		bspwm
-Version:	0.9.1
+Version:	0.9.2
 Release:	1%{?dist}
 Summary:	A tiling window manager based on binary space partitioning
 Group:		User Interface/Desktops
@@ -58,6 +58,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/xsessions/%{name}.desktop
 %{_datadir}/bash-completion/completions/bspc
 %{_datadir}/zsh/site-functions/_bspc
 %{_datadir}/xsessions/%{name}.desktop
+%{_datadir}/fish/vendor_completions.d/bspc.fish
 
 
 %changelog
