@@ -36,11 +36,11 @@ alt + Return
 
 # Start new terminal
 alt + shift + Return
-    qvm-run -q -a megatron urxvt
+    qvm-run -q -a megatron gnome-terminal
 
 # Start new browser
 alt + shift + b
-    qvm-run -q -a megatron firefox
+    qvm-run -q -a megatron google-chrome
 
 # Move focus or switch current node 
 alt + {_,shift + }{Left,Down,Up,Right}
@@ -85,26 +85,13 @@ super + shift + Escape
 
 # Turn on screensaver
 super + shift + l
-    xlock -mode bouboule -delay 40000
+    xlock -mode bouboule -nolock -delay 40000
 
 # Turn off monitor
 super + l
     sleep 1; xset dpms force off
 
 
-
-# Basic mouse bindings
-~button1
-    bspc pointer -g focus
-
-alt + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-
-#alt + !button{1-3}
-#   bspc pointer -t %i %i
-
-alt + @button{1-3}
-    bspc pointer -u
 
 # Special buttons
 XF86AudioRaiseVolume
@@ -121,14 +108,14 @@ XF86AudioMute
 
 # Qubes dom0 and appvm
 super + {_,shift} + 0
-    {konsole,qubes-manager}
+    {xfce4-terminal,qubes-manager}
 
 super + {_,shift +} 1
-    qvm-run -a -q ironhide {urxvt,firefox}
+    qvm-run -a -q ironhide {gnome-terminal,firefox}
 
-super + {_,shift} + 2
-    qvm-run -a -q starscream {urxvt,tor-browser-en}
+super + {_,shift +} 2
+    qvm-run -a -q starscream {gnome-terminal,google-chrome}
 
 super + {_,shift} + 3
-    qvm-run -a -q shockwave {gnome-terminal,firefox}
+    qvm-run -a -q anon-whonix {konsole,torbrowser}
 
